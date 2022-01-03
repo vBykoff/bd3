@@ -1,8 +1,11 @@
 #include "StudentDialog.h"
 #include "ui_studentdialog.h"
+#include <QDialogButtonBox>
+#include <QSqlTableModel>
 
-StudentDialog::StudentDialog(QDialog *parent)
+StudentDialog::StudentDialog(QDialog *parent, QSqlDatabase* p)
     : QDialog(parent)
+    , m_db(p)
     , m_ui(new Ui::StudentDialog)
 {
     m_ui->setupUi(this);
@@ -17,24 +20,58 @@ StudentDialog::StudentDialog(QDialog *parent)
     connect(m_ui->takeTaskButton        , &QPushButton::clicked,this, &StudentDialog::takeTask);
     connect(m_ui->takeRandomTaskButton  , &QPushButton::clicked,this, &StudentDialog::takeRandomTask);
 
-    m_settings = new QSettings("connection_config.ini", QSettings::IniFormat, this);
-    StudentSignIn S;
-    StudentInfo info;
-    load_StudentInfo(info);
-    S.set_surname(info.surname);
-    S.set_group(info.group);
+    m_settings = new QSettings("signin_config.ini", QSettings::IniFormat, this);
+    SignIn S;
+
+    load_StudentInfo(m_info);
+    S.set_login(m_info.login);
+    S.set_password(m_info.password);
 
     if (S.exec() == QDialog::Accepted)
     {
-        info.surname = S.get_surname();
-        info.group = S.get_group();
-        save_StudentInfo(info);
+        m_info.login = S.get_login();
+        m_info.password = S.get_password();
+        save_StudentInfo(m_info);
     }
 
-    m_ui->studentNameLabel->setText(info.surname);
-    m_ui->studentGroupLabel->setText(info.group);
-    m_ui->CollectiveName->setText("Коллектив");
+    QSqlQueryModel *querymodel = makeQuery("select surname, name, grp from students where login = '" + m_info.login + "' and password = '" + m_info.password + "';");
+    m_ui->StudentInfo->setModel(querymodel);
+
+//    m_ui->studentNameLabel->setText(info.login);
+//    m_ui->studentGroupLabel->setText(info.password);
+//    m_ui->CollectiveName->setText("Коллектив");
+
+    //////////////////////////////////////////
+//    QPushButton* acceptButton = new QPushButton("Accept");
+//    acceptButton->setMinimumSize(100, 30);
+//    acceptButton->setMaximumSize(100, 30);
+//    QPushButton* declineButton = new QPushButton("Decline");
+//    acceptButton->setMinimumSize(100, 30);
+//    acceptButton->setMaximumSize(100, 30);
+
+//    connect(acceptButton, &QPushButton::clicked, this, &StudentDialog::acceptEntering);
+
+
+//    QDialogButtonBox* b = new QDialogButtonBox;
+
+//    QSqlTableModel* model = new QSqlTableModel;
+//    model->setTable("teams");
+//    m_ui->notificationTable->setModel();
+
+//    for( int i = 0; i < m_ui->notificationTable->rowCount(); ++i )
+//    {
+//        m_ui->notificationTable->setIndexWidget(m_ui->notificationTable->model()->index(i, 2), b);
+//    }
+
+////////////////////////////////////////////////////
     exec();
+}
+
+
+
+void StudentDialog::acceptEntering()
+{
+
 }
 
 
@@ -45,8 +82,15 @@ StudentDialog::~StudentDialog()
 
 void StudentDialog::editProfile()
 {
-    EditProfileDialog d(this);
-    d.exec();
+    EditProfileDialog d;
+    if (d.exec() == QDialog::Accepted)
+    {
+        StudentInfo newInfo;
+        newInfo.login = d.getNewLogin();
+        newInfo.password = d.getNewPassword();
+        makeQuery("update students set login = '" + newInfo.login + "" + "' where login = '" + m_info.login + "' and password = '" + m_info.password + "';");
+
+    }
 }
 
 void StudentDialog::addNewMember()
@@ -98,10 +142,24 @@ void StudentDialog::createCollective()
     d.exec();
 }
 
+QSqlQueryModel* StudentDialog::makeQuery(const QString& a_queryString)
+{
+    QSqlQuery* query = new QSqlQuery(*m_db);
+    QSqlQueryModel *querymodel = new QSqlQueryModel;
+    if (query->exec(a_queryString))
+    {
+        querymodel->setQuery(*query);
+    }
+    return querymodel;
+}
+
 void StudentDialog::enterCollective()
 {
      EnterCollectiveDialog d;
-     d.exec();
+     if (d.exec() == QDialog::Accepted)
+     {
+         makeQuery("select sendNotifications();");
+     }
 }
 
 void StudentDialog::takeTask()
@@ -117,12 +175,12 @@ void StudentDialog::takeRandomTask()
 
 void StudentDialog::save_StudentInfo(const StudentInfo& info)
 {
-    m_settings->setValue("Surname", info.surname);
-    m_settings->setValue("Group"  , info.group);
+    m_settings->setValue("Login", info.login);
+    m_settings->setValue("Password"  , info.password);
 }
 
 void StudentDialog::load_StudentInfo(StudentInfo& info)
 {
-    info.surname = m_settings->value("Surname").toString();
-    info.group   = m_settings->value("Group").toString();
+    info.login = m_settings->value("Login").toString();
+    info.password = m_settings->value("Password").toString();
 }

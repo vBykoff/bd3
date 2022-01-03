@@ -5,10 +5,7 @@ EditProfileDialog::EditProfileDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EditProfileDialog)
 {
-    ui->setupUi(this);
-
-    connect(ui->changeButton, &QPushButton::clicked,this, &EditProfileDialog::change);
-    connect(ui->cancelButton, &QPushButton::clicked,this, &EditProfileDialog::cancel);
+    ui->setupUi(this);   
 }
 
 EditProfileDialog::~EditProfileDialog()
@@ -16,12 +13,13 @@ EditProfileDialog::~EditProfileDialog()
     delete ui;
 }
 
-void EditProfileDialog::change()
+QString EditProfileDialog::getNewLogin()
 {
-
+    return ui->loginLineEdit->text();
 }
 
-void EditProfileDialog::cancel()
+QString EditProfileDialog::getNewPassword()
 {
-
+    return ui->passwordLineEdit->text();
 }
+

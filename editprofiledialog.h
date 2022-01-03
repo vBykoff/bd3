@@ -14,11 +14,8 @@ class EditProfileDialog : public QDialog
 public:
     explicit EditProfileDialog(QWidget *parent = nullptr);
     ~EditProfileDialog();
-
-private slots:
-
-    void change();
-    void cancel();
+    QString getNewLogin();
+    QString getNewPassword();
 
 private:
     Ui::EditProfileDialog *ui;

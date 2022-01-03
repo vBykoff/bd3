@@ -75,65 +75,11 @@
       <attribute name="title">
        <string>Профиль</string>
       </attribute>
-      <widget class="QLabel" name="label">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>30</y>
-         <width>120</width>
-         <height>30</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Имя студента</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_2">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>60</y>
-         <width>120</width>
-         <height>30</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Группа</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_3">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>90</y>
-         <width>120</width>
-         <height>30</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Коллектив</string>
-       </property>
-      </widget>
       <widget class="QPushButton" name="editProfileButton">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>220</y>
+         <y>130</y>
          <width>271</width>
          <height>51</height>
         </rect>
@@ -142,140 +88,27 @@
         <string>Редактировать профиль</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_4">
+      <widget class="QTableView" name="StudentInfo">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>120</y>
-         <width>120</width>
-         <height>30</height>
+         <y>50</y>
+         <width>351</width>
+         <height>71</height>
         </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Преподаватель</string>
        </property>
       </widget>
-      <widget class="QLabel" name="studentNameLabel">
+      <widget class="QLabel" name="label">
        <property name="geometry">
         <rect>
-         <x>190</x>
-         <y>30</y>
-         <width>120</width>
-         <height>30</height>
+         <x>20</x>
+         <y>20</y>
+         <width>251</width>
+         <height>21</height>
         </rect>
        </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
        <property name="text">
-        <string>Имя студента</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="studentGroupLabel">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>60</y>
-         <width>120</width>
-         <height>30</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Имя студента</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="studentCollectiveLabel">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>90</y>
-         <width>120</width>
-         <height>30</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Имя студента</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="studentTeacherLabel">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>120</y>
-         <width>120</width>
-         <height>30</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Имя студента</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_10">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>150</y>
-         <width>120</width>
-         <height>30</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Дисциплина</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="studentSubjectLabel">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>150</y>
-         <width>120</width>
-         <height>30</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Имя студента</string>
+        <string>Информация о студенте:</string>
        </property>
       </widget>
      </widget>
@@ -577,12 +410,12 @@
       <attribute name="title">
        <string>Уведомления</string>
       </attribute>
-      <widget class="QListWidget" name="notificationsList">
+      <widget class="QTableWidget" name="notificationTable">
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>10</y>
-         <width>691</width>
+         <width>711</width>
          <height>501</height>
         </rect>
        </property>

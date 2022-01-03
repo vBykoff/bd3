@@ -7,8 +7,7 @@ EnterCollectiveDialog::EnterCollectiveDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->enterButton, &QPushButton::clicked, this, &EnterCollectiveDialog::enter);
-    connect(ui->cancelButton, &QPushButton::clicked, this, &EnterCollectiveDialog::cancel);
+
 }
 
 EnterCollectiveDialog::~EnterCollectiveDialog()
@@ -16,12 +15,8 @@ EnterCollectiveDialog::~EnterCollectiveDialog()
     delete ui;
 }
 
-void EnterCollectiveDialog::enter()
+QString EnterCollectiveDialog::getName()
 {
-
+    return ui->lineEdit->text();
 }
 
-void EnterCollectiveDialog::cancel()
-{
-
-}

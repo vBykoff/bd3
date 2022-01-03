@@ -1,13 +1,16 @@
 #ifndef STUDENTDIALOG_H
 #define STUDENTDIALOG_H
 
-#include "StudentSignIn.h"
+#include "signin.h"
 #include "AddMemberDialog.h"
 #include "editprofiledialog.h"
 #include "deletememberdialog.h"
 #include "createcollectivedialog.h"
 #include "entercollectivedialog.h"
 
+#include <QBoxLayout>
+#include <QLineEdit>
+#include <QListWidget>
 #include <QDialog>
 #include <QMessageBox>
 #include <QSqlDatabase>
@@ -30,8 +33,8 @@ QT_END_NAMESPACE
 
 struct StudentInfo
 {
-    QString surname;
-    QString group;
+    QString login;
+    QString password;
 };
 
 
@@ -41,7 +44,7 @@ class StudentDialog : public QDialog
 
 public:
 
-    StudentDialog(QDialog *parent = nullptr);
+    StudentDialog(QDialog *parent = nullptr, QSqlDatabase* p = nullptr);
     ~StudentDialog();
 
 private slots:
@@ -55,15 +58,20 @@ private slots:
     void enterCollective();
     void takeTask();
     void takeRandomTask();
+    void acceptEntering();
 
 private:
 
-    QSqlDatabase m_db;
+    QSqlDatabase* m_db;
     Ui::StudentDialog* m_ui;
     QSettings* m_settings;
+    StudentInfo m_info;
 
     void save_StudentInfo(const StudentInfo&);
     void load_StudentInfo(StudentInfo&);
+
+    QWidget* createButtonWidget();
+    QSqlQueryModel* makeQuery(const QString& a_queryString);
 
 
 };

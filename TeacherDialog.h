@@ -1,7 +1,10 @@
 #ifndef TEACHERDIALOG_H
 #define TEACHERDIALOG_H
 
+#include "teachersignin.h"
+
 #include <QDialog>
+#include <QSettings>
 #include <QStringList>
 #include <QVector>
 #include <QDate>
@@ -18,6 +21,7 @@ class TeacherDialog : public QDialog
 private:
     Ui::TeacherDialog *ui;
 
+    QSettings *m_settings;
 public:
 
     TeacherDialog(QDialog *parent = nullptr);

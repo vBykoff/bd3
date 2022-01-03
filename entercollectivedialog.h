@@ -14,9 +14,7 @@ class EnterCollectiveDialog : public QDialog
 public:
     explicit EnterCollectiveDialog(QWidget *parent = nullptr);
     ~EnterCollectiveDialog();
-private slots:
-    void enter();
-    void cancel();
+    QString getName();
 
 private:
     Ui::EnterCollectiveDialog *ui;
