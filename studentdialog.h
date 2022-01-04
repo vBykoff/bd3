@@ -2,9 +2,7 @@
 #define STUDENTDIALOG_H
 
 #include "signin.h"
-#include "AddMemberDialog.h"
 #include "editprofiledialog.h"
-#include "deletememberdialog.h"
 #include "createcollectivedialog.h"
 #include "entercollectivedialog.h"
 
@@ -35,6 +33,21 @@ struct StudentInfo
 {
     QString login;
     QString password;
+    int id;
+    int teamId;
+    QString name;
+    QString surname;
+    QString group;
+
+    StudentInfo():
+        login(""),
+        password(""),
+        id(0),
+        teamId(0),
+        name(""),
+        surname(""),
+        group("")
+    {}
 };
 
 
@@ -59,6 +72,7 @@ private slots:
     void takeTask();
     void takeRandomTask();
     void acceptEntering();
+    void declineEntering();
 
 private:
 
@@ -70,9 +84,13 @@ private:
     void save_StudentInfo(const StudentInfo&);
     void load_StudentInfo(StudentInfo&);
 
-    QWidget* createButtonWidget();
-    QSqlQueryModel* makeQuery(const QString& a_queryString);
+    QWidget* createAcceptButtonWidget();
+    QWidget* createDeclineButtonWidget();
+    QSqlQueryModel* makeQuery(const QString& queryString);
 
+//protected:
+
+//    void changeEvent(QEvent* e) override;
 
 };
 
