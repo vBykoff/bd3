@@ -4,25 +4,20 @@
 #include <QDialog>
 
 namespace Ui {
-class createCollectiveDialog;
+class CreateCollectiveDialog;
 }
 
-class createCollectiveDialog : public QDialog
+class CreateCollectiveDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-
-    explicit createCollectiveDialog(QWidget *parent = nullptr);
-    ~createCollectiveDialog();
-
-private slots:
-
-    void create();
-    void cancel();
+    explicit CreateCollectiveDialog(QWidget *parent = nullptr);
+    ~CreateCollectiveDialog();
+    QString getName();
 
 private:
-    Ui::createCollectiveDialog *ui;
+    Ui::CreateCollectiveDialog *ui;
 };
 
 #endif // CREATECOLLECTIVEDIALOG_H

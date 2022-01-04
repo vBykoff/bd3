@@ -5,7 +5,7 @@ EditProfileDialog::EditProfileDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EditProfileDialog)
 {
-    ui->setupUi(this);   
+    ui->setupUi(this);
 }
 
 EditProfileDialog::~EditProfileDialog()
@@ -13,13 +13,10 @@ EditProfileDialog::~EditProfileDialog()
     delete ui;
 }
 
-QString EditProfileDialog::getNewLogin()
-{
-    return ui->loginLineEdit->text();
+QString EditProfileDialog::getNewLogin() {
+    return ui->LoginLineEdit->text();
 }
 
-QString EditProfileDialog::getNewPassword()
-{
-    return ui->passwordLineEdit->text();
+QString EditProfileDialog::getNewPassword() {
+    return ui->PasswordLineEdit->text();
 }
-

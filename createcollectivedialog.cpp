@@ -1,26 +1,18 @@
 #include "createcollectivedialog.h"
 #include "ui_createcollectivedialog.h"
 
-createCollectiveDialog::createCollectiveDialog(QWidget *parent) :
+CreateCollectiveDialog::CreateCollectiveDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::createCollectiveDialog)
+    ui(new Ui::CreateCollectiveDialog)
 {
     ui->setupUi(this);
-    connect(ui->createNewCollectiveButton, &QPushButton::clicked,this, &createCollectiveDialog::create);
-    connect(ui->cancel                   , &QPushButton::clicked,this, &createCollectiveDialog::cancel);
 }
 
-createCollectiveDialog::~createCollectiveDialog()
+CreateCollectiveDialog::~CreateCollectiveDialog()
 {
     delete ui;
 }
 
-void createCollectiveDialog::create()
-{
-
-}
-
-void createCollectiveDialog::cancel()
-{
-
+QString CreateCollectiveDialog::getName() {
+    return ui->NameLineEdit->text();
 }

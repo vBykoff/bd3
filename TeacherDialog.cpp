@@ -13,9 +13,7 @@ TeacherDialog::TeacherDialog(QDialog *parent) :
     ui->setupUi(this);
     m_settings = new QSettings("connection_config.ini", QSettings::IniFormat, this);
     TeacherSignIn T;
-
     T.exec();
-
     exec();
 }
 

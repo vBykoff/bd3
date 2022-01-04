@@ -6,17 +6,9 @@ EnterCollectiveDialog::EnterCollectiveDialog(QWidget *parent) :
     ui(new Ui::EnterCollectiveDialog)
 {
     ui->setupUi(this);
-
-
 }
 
 EnterCollectiveDialog::~EnterCollectiveDialog()
 {
     delete ui;
 }
-
-QString EnterCollectiveDialog::getName()
-{
-    return ui->lineEdit->text();
-}
-
